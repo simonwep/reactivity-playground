@@ -8,7 +8,7 @@
     "author": "Simon Reinisch <trash@reinisch.io>",
     "scripts": {
         "test": "vitest",
-        "build": "vite build",
+        "build": "tsc && vite build",
         "lint": "eslint src/**/*.ts",
         "lint:fix": "npm run lint -- --fix"
     },
