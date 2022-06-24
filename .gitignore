@@ -1,0 +1,7 @@
+# Build files and dependencies
+node_modules
+dist
+
+# IDE Files
+.idea
+.vscode
