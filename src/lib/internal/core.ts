@@ -6,13 +6,17 @@ export const _touch = (ref: Ref) => {
   watcher.forEach((fn) => fn(ref));
 };
 
-export const _effect = (trigger: () => void, ignored?: Ref[]) => {
+export const _effect = (trigger: () => void, ignored?: Ref[]): (() => void) => {
   let touched: Ref[] = [];
 
-  const collect = () => {
+  const clear = () => {
     // Unsubscribe from all refs previously watched
     touched.forEach((ref) => ref.unSubscribe(collect));
     touched = [];
+  };
+
+  const collect = () => {
+    clear();
 
     // Collect refs accessed during the computed function
     const watch = (ref: Ref) => {
@@ -31,4 +35,5 @@ export const _effect = (trigger: () => void, ignored?: Ref[]) => {
   };
 
   collect();
+  return clear;
 };
