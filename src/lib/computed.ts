@@ -1,4 +1,4 @@
-import { _effect } from './core';
+import { _effect } from './internal/core';
 import { ref, Ref } from './ref';
 
 export const computed = <T>(fn: () => T): Ref<T> => {

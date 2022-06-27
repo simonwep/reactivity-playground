@@ -1,4 +1,4 @@
-import { Ref } from './ref';
+import { Ref } from '../ref';
 
 const watcher: Set<(v: Ref) => void> = new Set();
 

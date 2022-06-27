@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { _touch } from './core';
+import { _touch } from './internal/core';
 
 export type Subscriber<T = any> = (oldValue: T, newValue: T) => void;
 
