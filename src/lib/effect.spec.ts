@@ -19,4 +19,9 @@ test('Should trigger an effect', () => {
   a.value = 2;
   b.value = 5;
   expect(cb).toHaveBeenCalledTimes(3);
+
+  c.value = 5;
+  a.value = 2;
+  b.value = 5;
+  expect(cb).toHaveBeenCalledTimes(3);
 });

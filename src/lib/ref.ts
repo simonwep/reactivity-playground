@@ -23,6 +23,11 @@ export const ref = <T = any>(init?: T): Ref<T> => {
     },
 
     set value(v: T) {
+      // Ignore non-changes
+      if (v === value) {
+        return;
+      }
+
       const oldValue = value;
       value = v;
 
