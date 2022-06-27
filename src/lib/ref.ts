@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { touch } from './core';
+import { _touch } from './core';
 
 export type Subscriber<T = any> = (oldValue: T, newValue: T) => void;
 
@@ -35,7 +35,7 @@ export const ref = <T = any>(init?: T): Ref<T> => {
     },
 
     get value() {
-      touch(this);
+      _touch(this);
       return value;
     }
   };

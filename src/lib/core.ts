@@ -2,11 +2,11 @@ import { Ref } from './ref';
 
 const watcher: Set<(v: Ref) => void> = new Set();
 
-export const touch = (ref: Ref) => {
+export const _touch = (ref: Ref) => {
   watcher.forEach((fn) => fn(ref));
 };
 
-export const effect = (trigger: () => void, ignored?: Ref[]) => {
+export const _effect = (trigger: () => void, ignored?: Ref[]) => {
   let touched: Ref[] = [];
 
   const collect = () => {
