@@ -41,7 +41,7 @@ a.value = 2; // Logs {value: 2, oldValue: 5}
 
 ### Effects
 
-> [back to top](#summary) | [source](src/lib/effect.ts) | [ref in vue](https://vuejs.org/api/reactivity-core.html#watcheffect)
+> [back to top](#summary) | [source](src/lib/effect.ts) | [effects in vue](https://vuejs.org/api/reactivity-core.html#watcheffect)
 
 #### Signature
 
@@ -80,12 +80,12 @@ a.value = 5; // Logs nothing
 
 ### Computed values
 
-> [back to top](#summary) | [source](src/lib/computed.ts) | [ref in vue](https://vuejs.org/guide/essentials/computed.html)
+> [back to top](#summary) | [source](src/lib/computed.ts) | [computed in vue](https://vuejs.org/guide/essentials/computed.html)
 
 #### Signature
 
 ```ts
-type ComputedRef<T> = Ref<T>;
+type ComputedRef<T> = ReadonlyRef<T>;
 type computed = <T>(v: () => T) => ComputedRef<T>;
 ```
 
@@ -109,7 +109,7 @@ Trying to set the value of a computed value will throw an error.
 
 ### Watchers
 
-> [back to top](#summary) | [source](src/lib/watch.ts) | [ref in vue](https://vuejs.org/guide/essentials/watchers.html)
+> [back to top](#summary) | [source](src/lib/watch.ts) | [watchers in vue](https://vuejs.org/guide/essentials/watchers.html)
 
 #### Signature
 
@@ -145,4 +145,30 @@ b.value = 4;
 
 // Stop watching
 stop();
+```
+
+### Readonly
+
+> [back to top](#summary) | [source](src/lib/readonly.ts) | [readonly in vue](https://vuejs.org/api/reactivity-core.html#readonly)
+
+#### Signature
+
+```ts
+type ReadonlyRef<T> = Ref<T>;
+type Readonly = <T>(v: Ref<T>) => ReadonlyRef<T>;
+```
+
+#### Example
+
+Wraps a [`ref`](#refs) and marks it as readonly:
+
+```ts
+const a = ref(6);
+const b = readonly(a);
+
+b.value; // 6
+a.value = 7;
+
+b.value; // 7;
+b.value = 5; // Throw error
 ```

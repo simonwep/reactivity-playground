@@ -1,7 +1,8 @@
 import { _effect } from './internal/core';
-import { ref, Ref } from './ref';
+import { ReadonlyRef } from './readonly';
+import { ref } from './ref';
 
-export type ComputedRef<T> = Ref<T>;
+export type ComputedRef<T> = ReadonlyRef<T>;
 
 export const computed = <T>(fn: () => T): ComputedRef<T> => {
   const result = ref<T>();
