@@ -17,6 +17,8 @@ Some features are ignored on purpose as it doesn't make that much sense to imple
 #### Signature
 
 ```ts
+type Subscriber<T = any> = (newValue: T, oldValue: T) => void
+
 interface Ref<T = any> {
   subscribe(fn: Subscriber<T>);
   unSubscribe(fn: Subscriber<T>);

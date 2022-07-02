@@ -12,8 +12,9 @@ export const readonly = <T>(v: Ref<T>): ReadonlyRef<T> => {
     modifying = false;
   });
 
-  internal.subscribe(() => {
+  internal.subscribe((_, oldValue) => {
     if (!modifying) {
+      internal.value = oldValue; // Re-apply old value
       throw new Error('Cannot modify readonly ref.');
     }
   });

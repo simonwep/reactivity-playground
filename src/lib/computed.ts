@@ -5,20 +5,21 @@ import { ref } from './ref';
 export type ComputedRef<T> = ReadonlyRef<T>;
 
 export const computed = <T>(fn: () => T): ComputedRef<T> => {
-  const result = ref<T>();
+  const internal = ref<T>();
   let modifying = false;
 
   _effect(() => {
     modifying = true;
-    result.value = fn();
+    internal.value = fn();
     modifying = false;
-  }, [result]);
+  }, [internal]);
 
-  result.subscribe(() => {
+  internal.subscribe((_, oldValue) => {
     if (!modifying) {
+      internal.value = oldValue; // Re-apply old value
       throw new Error('Computed values should not be modified.');
     }
   });
 
-  return result;
+  return internal;
 };

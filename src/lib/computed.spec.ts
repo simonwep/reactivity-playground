@@ -22,6 +22,8 @@ test('Should throw an error on modification', () => {
   const sum = computed(() => a.value + b.value);
 
   expect(() => (sum.value = 5)).toThrow();
+
+  expect(sum.value).toEqual(8);
 });
 
 test('Should recompute several computed properties', () => {

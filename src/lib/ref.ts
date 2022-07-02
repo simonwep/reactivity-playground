@@ -7,7 +7,7 @@ export type UnwrapRefs<T extends Ref[] | Ref> = T extends Ref[]
   ? T['value']
   : never;
 
-export type Subscriber<T = any> = (oldValue: T, newValue: T) => void;
+export type Subscriber<T = any> = (newValue: T, oldValue: T) => void;
 
 export interface Ref<T = any> {
   subscribe(fn: Subscriber<T>);

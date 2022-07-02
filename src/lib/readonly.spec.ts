@@ -15,4 +15,6 @@ test('Should throw an error if a readonly ref is modified', () => {
   expect(v2.value).toEqual(6);
 
   expect(() => (v2.value = 8)).toThrow();
+
+  expect(v2.value).toEqual(6);
 });
