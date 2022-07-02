@@ -1,8 +1,9 @@
 ## Summary
 
 This is a demo project to better understand how [Vue3's reactivity](https://vuejs.org/guide/extras/reactivity-in-depth.html#what-is-reactivity) works internally.
+Some features are ignored on purpose as it doesn't make that much sense to implement those in vanilla js without having a lifecycle.
 
-## Implementations
+### Implementations
 
 * [Refs](#refs)
 * [Effects](#effects)
@@ -104,6 +105,8 @@ a.value = 3; // Logs {value: 3, oldValue: 0}
 b.value = 5; // Logs {value: 5, oldValue: 3}
 ```
 
+Trying to set the value of a computed value will throw an error.
+
 ### Watchers
 
 > [back to top](#summary) | [source](src/lib/watch.ts) | [ref in vue](https://vuejs.org/guide/essentials/watchers.html)
@@ -119,8 +122,8 @@ type StopWatchCallback = () => void;
 type WatchCallback<T extends Ref[] | Ref> = (args: UnwrapRefs<T>) => void;
 
 type watch = <T extends Ref[] | Ref>(
-  refs: T, 
-  cb: WatchCallback<T>, 
+  refs: T,
+  cb: WatchCallback<T>,
   options: WatchOptions
 ) => StopWatchCallback;
 ```

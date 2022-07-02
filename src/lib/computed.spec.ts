@@ -1,4 +1,4 @@
-import { assert, test } from 'vitest';
+import { assert, expect, test } from 'vitest';
 import { computed } from './computed';
 import { ref } from './ref';
 
@@ -13,6 +13,15 @@ test('Should recompute a computed property', () => {
   b.value = 5;
 
   assert.equal(sum.value, 10);
+});
+
+test('Should throw an error on modification', () => {
+  const a = ref(5);
+  const b = ref(3);
+
+  const sum = computed(() => a.value + b.value);
+
+  expect(() => (sum.value = 5)).toThrow();
 });
 
 test('Should recompute several computed properties', () => {
