@@ -1,5 +1,7 @@
 import { _effect } from './internal/core';
 
-export const effect = (fn: () => void) => {
+export type StopEffectCallback = () => void;
+
+export const effect = (fn: () => void): StopEffectCallback => {
   return _effect(fn);
 };

@@ -1,6 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { _touch } from './internal/core';
 
+export type UnwrapRefs<T extends Ref[] | Ref> = T extends Ref[]
+  ? { [K in keyof T]: T[K] extends Ref ? T[K]['value'] : never }
+  : T extends Ref
+  ? T['value']
+  : never;
+
 export type Subscriber<T = any> = (oldValue: T, newValue: T) => void;
 
 export interface Ref<T = any> {
