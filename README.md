@@ -1,5 +1,7 @@
 ## Summary
 
+[![CI](https://github.com/Simonwep/reactivity-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/Simonwep/reactivity-demo/actions/workflows/ci.yml)
+
 This is a demo project to better understand how [Vue3's reactivity](https://vuejs.org/guide/extras/reactivity-in-depth.html#what-is-reactivity) works internally.
 Some features are ignored on purpose as it doesn't make that much sense to implement those in vanilla js without having a lifecycle.
 
