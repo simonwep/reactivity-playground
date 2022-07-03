@@ -1,22 +1,16 @@
+import { createLock } from './internal/createLock';
 import { ref, Ref } from './ref';
 
 export type ReadonlyRef<T> = Ref<T>;
 
+const MODIFY_ERROR = 'Computed values should not be modified.';
+
 export const readonly = <T>(v: Ref<T>): ReadonlyRef<T> => {
   const internal = ref<T>(v.value);
-  let modifying = false;
+  const modify = createLock(internal, MODIFY_ERROR);
 
   v.subscribe((value) => {
-    modifying = true;
-    internal.value = value;
-    modifying = false;
-  });
-
-  internal.subscribe((_, oldValue) => {
-    if (!modifying) {
-      internal.value = oldValue; // Re-apply old value
-      throw new Error('Cannot modify readonly ref.');
-    }
+    modify(() => (internal.value = value));
   });
 
   return internal;

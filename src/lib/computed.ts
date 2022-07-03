@@ -1,25 +1,19 @@
 import { _effect } from './internal/core';
+import { createLock } from './internal/createLock';
 import { ReadonlyRef } from './readonly';
 import { ref } from './ref';
 
 export type ComputedRef<T> = ReadonlyRef<T>;
 
+const MODIFY_ERROR = 'Computed values should not be modified.';
+
 export const computed = <T>(fn: () => T): ComputedRef<T> => {
   const internal = ref<T>();
-  let modifying = false;
+  const modify = createLock(internal, MODIFY_ERROR);
 
   _effect(() => {
-    modifying = true;
-    internal.value = fn();
-    modifying = false;
+    modify(() => (internal.value = fn()));
   }, [internal]);
-
-  internal.subscribe((_, oldValue) => {
-    if (!modifying) {
-      internal.value = oldValue; // Re-apply old value
-      throw new Error('Computed values should not be modified.');
-    }
-  });
 
   return internal;
 };
